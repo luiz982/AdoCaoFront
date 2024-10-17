@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+*{
+    font-family: "Outfit", sans-serif;
+}
+.linha{
+    width: 50vh;
+}
+.credenciais{
+    max-width: 40vh !important;
+}
+
+.botao{
+    width: 40vh;
+    height: 46px;
+    border-radius: 100px !important;
+}
+
+.lembrar{
+    width: 40vh;
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-label{
+    display: flex;
+    justify-content: flex-start;
+}
+
+.ps-sidebar-container{
+    background-color: white !important;
+}
+body{
+    background-color: white !important;
+}
