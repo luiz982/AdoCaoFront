@@ -13,6 +13,12 @@ export default function Login() {
     const [isLoading, setLoading] = useState(false)
     const router = useRouter();
 
+    const handleSubmit = (event) => {
+        event.preventDefault(); 
+        router.push('/Principal'); 
+    };
+
+
     return (
         <Page isLogin>
             <div className='text-center vh-100'>
@@ -22,7 +28,7 @@ export default function Login() {
                 <h2 id="" className="form-text text-center">Por favor, entre com suas credenciais</h2>
                 <hr className='form linha mx-auto'></hr>
                 <div className='container'>
-                    <form className='' onSubmit={() => router.push('/Principal')}>
+                    <form className='' onSubmit={handleSubmit}>
                         <div className="mb-3 mx-auto credenciais">
                             <label htmlFor="username" className="form-label">Usuário</label>
                             <input type="" className="form-control" id="username" aria-describedby="emailHelp" />
