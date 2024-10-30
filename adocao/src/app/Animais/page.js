@@ -23,7 +23,8 @@ export default function Animais() {
     const [isLoading, setIsLoading] = useState(false);
     const [isRtl, setIsRtl] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
-    const [searchTerm, setSearchTerm] = useState(""); 
+    const [searchTerm, setSearchTerm] = useState("");
+    const [selectedType, setSelectedType] = useState(null);
     const itemsPerPage = 8;
     const router = useRouter();
     const opcoesTipo = [
@@ -32,25 +33,36 @@ export default function Animais() {
         { value: 'Gato', label: 'Gato' },
     ]
     const Animais = [
-        { nome: 'Max' ,raca: 'Pitbull' ,foto: 'https://s2-g1.glbimg.com/RVuzSU6kwzy1OwcUwUizgW577b0=/0x161:900x744/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/W/B/bdA6Z4Rz6C5yyrB07Tcg/whatsapp-image-2021-07-13-at-4.29.58-pm.jpeg' },
-        { nome: 'Tito',raca: 'Labrador' , foto: 'https://s2-g1.glbimg.com/RVuzSU6kwzy1OwcUwUizgW577b0=/0x161:900x744/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/W/B/bdA6Z4Rz6C5yyrB07Tcg/whatsapp-image-2021-07-13-at-4.29.58-pm.jpeg' },
-        { nome: 'Max' ,raca: 'Labrador' ,foto: 'https://s2-g1.glbimg.com/RVuzSU6kwzy1OwcUwUizgW577b0=/0x161:900x744/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/W/B/bdA6Z4Rz6C5yyrB07Tcg/whatsapp-image-2021-07-13-at-4.29.58-pm.jpeg' },
-        { nome: 'Max' ,raca: 'Labrador' ,foto: 'https://s2-g1.glbimg.com/RVuzSU6kwzy1OwcUwUizgW577b0=/0x161:900x744/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/W/B/bdA6Z4Rz6C5yyrB07Tcg/whatsapp-image-2021-07-13-at-4.29.58-pm.jpeg' },
-        { nome: 'Max' ,raca: 'Labrador' ,foto: 'https://s2-g1.glbimg.com/RVuzSU6kwzy1OwcUwUizgW577b0=/0x161:900x744/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/W/B/bdA6Z4Rz6C5yyrB07Tcg/whatsapp-image-2021-07-13-at-4.29.58-pm.jpeg' },
-        { nome: 'Max' ,raca: 'Labrador' ,foto: 'https://s2-g1.glbimg.com/RVuzSU6kwzy1OwcUwUizgW577b0=/0x161:900x744/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/W/B/bdA6Z4Rz6C5yyrB07Tcg/whatsapp-image-2021-07-13-at-4.29.58-pm.jpeg' },
-        { nome: 'Max' ,raca: 'Labrador' ,foto: 'https://s2-g1.glbimg.com/RVuzSU6kwzy1OwcUwUizgW577b0=/0x161:900x744/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/W/B/bdA6Z4Rz6C5yyrB07Tcg/whatsapp-image-2021-07-13-at-4.29.58-pm.jpeg' },
-        { nome: 'Max' ,raca: 'Labrador' ,foto: 'https://s2-g1.glbimg.com/RVuzSU6kwzy1OwcUwUizgW577b0=/0x161:900x744/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/W/B/bdA6Z4Rz6C5yyrB07Tcg/whatsapp-image-2021-07-13-at-4.29.58-pm.jpeg' },
-        { nome: 'Max' ,raca: 'Labrador' ,foto: 'https://s2-g1.glbimg.com/RVuzSU6kwzy1OwcUwUizgW577b0=/0x161:900x744/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/W/B/bdA6Z4Rz6C5yyrB07Tcg/whatsapp-image-2021-07-13-at-4.29.58-pm.jpeg' },
-        { nome: 'Luna',raca: 'Labrador' ,foto: 'https://s2-g1.glbimg.com/RVuzSU6kwzy1OwcUwUizgW577b0=/0x161:900x744/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/W/B/bdA6Z4Rz6C5yyrB07Tcg/whatsapp-image-2021-07-13-at-4.29.58-pm.jpeg' },
-        { nome: 'Max' ,raca: 'Labrador' ,foto: 'https://s2-g1.glbimg.com/RVuzSU6kwzy1OwcUwUizgW577b0=/0x161:900x744/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/W/B/bdA6Z4Rz6C5yyrB07Tcg/whatsapp-image-2021-07-13-at-4.29.58-pm.jpeg' },
-        { nome: 'Max' ,raca: 'Labrador' ,foto: 'https://s2-g1.glbimg.com/RVuzSU6kwzy1OwcUwUizgW577b0=/0x161:900x744/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/W/B/bdA6Z4Rz6C5yyrB07Tcg/whatsapp-image-2021-07-13-at-4.29.58-pm.jpeg' },
-        { nome: 'Max' ,raca: 'Labrador' ,foto: 'https://s2-g1.glbimg.com/RVuzSU6kwzy1OwcUwUizgW577b0=/0x161:900x744/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/W/B/bdA6Z4Rz6C5yyrB07Tcg/whatsapp-image-2021-07-13-at-4.29.58-pm.jpeg' },
-    ]
+        { nome: 'Max', foto: 'https://s2-g1.glbimg.com/RVuzSU6kwzy1OwcUwUizgW577b0=/0x161:900x744/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/W/B/bdA6Z4Rz6C5yyrB07Tcg/whatsapp-image-2021-07-13-at-4.29.58-pm.jpeg', raca: 'Labrador', tipo: 'Cachorro' },
+        { nome: 'Bella', foto: 'https://s2-g1.glbimg.com/RVuzSU6kwzy1OwcUwUizgW577b0=/0x161:900x744/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/W/B/bdA6Z4Rz6C5yyrB07Tcg/whatsapp-image-2021-07-13-at-4.29.58-pm.jpeg', raca: 'Bulldog', tipo: 'Cachorro' },
+        { nome: 'Luna', foto: 'https://s2-g1.glbimg.com/RVuzSU6kwzy1OwcUwUizgW577b0=/0x161:900x744/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/W/B/bdA6Z4Rz6C5yyrB07Tcg/whatsapp-image-2021-07-13-at-4.29.58-pm.jpeg', raca: 'Persa', tipo: 'Gato' },
+        { nome: 'Max', foto: 'https://s2-g1.glbimg.com/RVuzSU6kwzy1OwcUwUizgW577b0=/0x161:900x744/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/W/B/bdA6Z4Rz6C5yyrB07Tcg/whatsapp-image-2021-07-13-at-4.29.58-pm.jpeg', raca: 'Labrador', tipo: 'Cachorro' },
+        { nome: 'Bella', foto: 'https://s2-g1.glbimg.com/RVuzSU6kwzy1OwcUwUizgW577b0=/0x161:900x744/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/W/B/bdA6Z4Rz6C5yyrB07Tcg/whatsapp-image-2021-07-13-at-4.29.58-pm.jpeg', raca: 'Bulldog', tipo: 'Cachorro' },
+        { nome: 'Luna', foto: 'https://s2-g1.glbimg.com/RVuzSU6kwzy1OwcUwUizgW577b0=/0x161:900x744/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/W/B/bdA6Z4Rz6C5yyrB07Tcg/whatsapp-image-2021-07-13-at-4.29.58-pm.jpeg', raca: 'Persa', tipo: 'Gato' },
+        { nome: 'Max', foto: 'https://s2-g1.glbimg.com/RVuzSU6kwzy1OwcUwUizgW577b0=/0x161:900x744/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/W/B/bdA6Z4Rz6C5yyrB07Tcg/whatsapp-image-2021-07-13-at-4.29.58-pm.jpeg', raca: 'Labrador', tipo: 'Cachorro' },
+        { nome: 'Bella', foto: 'https://s2-g1.glbimg.com/RVuzSU6kwzy1OwcUwUizgW577b0=/0x161:900x744/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/W/B/bdA6Z4Rz6C5yyrB07Tcg/whatsapp-image-2021-07-13-at-4.29.58-pm.jpeg', raca: 'Bulldog', tipo: 'Cachorro' },
+        { nome: 'Luna', foto: 'https://s2-g1.glbimg.com/RVuzSU6kwzy1OwcUwUizgW577b0=/0x161:900x744/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/W/B/bdA6Z4Rz6C5yyrB07Tcg/whatsapp-image-2021-07-13-at-4.29.58-pm.jpeg', raca: 'Persa', tipo: 'Gato' },
+        { nome: 'Max', foto: 'https://s2-g1.glbimg.com/RVuzSU6kwzy1OwcUwUizgW577b0=/0x161:900x744/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/W/B/bdA6Z4Rz6C5yyrB07Tcg/whatsapp-image-2021-07-13-at-4.29.58-pm.jpeg', raca: 'Labrador', tipo: 'Cachorro' },
+        { nome: 'Bella', foto: 'https://s2-g1.glbimg.com/RVuzSU6kwzy1OwcUwUizgW577b0=/0x161:900x744/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/W/B/bdA6Z4Rz6C5yyrB07Tcg/whatsapp-image-2021-07-13-at-4.29.58-pm.jpeg', raca: 'Bulldog', tipo: 'Cachorro' },
+        { nome: 'Luna', foto: 'https://s2-g1.glbimg.com/RVuzSU6kwzy1OwcUwUizgW577b0=/0x161:900x744/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/W/B/bdA6Z4Rz6C5yyrB07Tcg/whatsapp-image-2021-07-13-at-4.29.58-pm.jpeg', raca: 'Persa', tipo: 'Gato' },
+        { nome: 'Max', foto: 'https://s2-g1.glbimg.com/RVuzSU6kwzy1OwcUwUizgW577b0=/0x161:900x744/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/W/B/bdA6Z4Rz6C5yyrB07Tcg/whatsapp-image-2021-07-13-at-4.29.58-pm.jpeg', raca: 'Labrador', tipo: 'Cachorro' },
+        { nome: 'Bella', foto: 'https://s2-g1.glbimg.com/RVuzSU6kwzy1OwcUwUizgW577b0=/0x161:900x744/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/W/B/bdA6Z4Rz6C5yyrB07Tcg/whatsapp-image-2021-07-13-at-4.29.58-pm.jpeg', raca: 'Bulldog', tipo: 'Cachorro' },
+        { nome: 'Luna', foto: 'https://s2-g1.glbimg.com/RVuzSU6kwzy1OwcUwUizgW577b0=/0x161:900x744/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/W/B/bdA6Z4Rz6C5yyrB07Tcg/whatsapp-image-2021-07-13-at-4.29.58-pm.jpeg', raca: 'Persa', tipo: 'Gato' },
+        { nome: 'Max', foto: 'https://s2-g1.glbimg.com/RVuzSU6kwzy1OwcUwUizgW577b0=/0x161:900x744/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/W/B/bdA6Z4Rz6C5yyrB07Tcg/whatsapp-image-2021-07-13-at-4.29.58-pm.jpeg', raca: 'Labrador', tipo: 'Cachorro' },
+        { nome: 'Bella', foto: 'https://s2-g1.glbimg.com/RVuzSU6kwzy1OwcUwUizgW577b0=/0x161:900x744/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/W/B/bdA6Z4Rz6C5yyrB07Tcg/whatsapp-image-2021-07-13-at-4.29.58-pm.jpeg', raca: 'Bulldog', tipo: 'Cachorro' },
+        { nome: 'Luna', foto: 'https://s2-g1.glbimg.com/RVuzSU6kwzy1OwcUwUizgW577b0=/0x161:900x744/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/W/B/bdA6Z4Rz6C5yyrB07Tcg/whatsapp-image-2021-07-13-at-4.29.58-pm.jpeg', raca: 'Persa', tipo: 'Gato' },
+        { nome: 'Max', foto: 'https://s2-g1.glbimg.com/RVuzSU6kwzy1OwcUwUizgW577b0=/0x161:900x744/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/W/B/bdA6Z4Rz6C5yyrB07Tcg/whatsapp-image-2021-07-13-at-4.29.58-pm.jpeg', raca: 'Labrador', tipo: 'Cachorro' },
+        { nome: 'Bella', foto: 'https://s2-g1.glbimg.com/RVuzSU6kwzy1OwcUwUizgW577b0=/0x161:900x744/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/W/B/bdA6Z4Rz6C5yyrB07Tcg/whatsapp-image-2021-07-13-at-4.29.58-pm.jpeg', raca: 'Bulldog', tipo: 'Cachorro' },
+        { nome: 'Luna', foto: 'https://s2-g1.glbimg.com/RVuzSU6kwzy1OwcUwUizgW577b0=/0x161:900x744/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/W/B/bdA6Z4Rz6C5yyrB07Tcg/whatsapp-image-2021-07-13-at-4.29.58-pm.jpeg', raca: 'Persa', tipo: 'Gato' },
 
-    const filteredAnimals = Animais.filter(animal => 
-        animal.nome.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        animal.raca.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    ];
+
+    const filteredAnimals = Animais.filter(animal => {
+        const matchesType = selectedType && selectedType.value !== 'Todos' ? animal.tipo === selectedType.value : true;
+        const matchesSearch = animal.nome.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            animal.raca.toLowerCase().includes(searchTerm.toLowerCase());
+        return matchesType && matchesSearch;
+    });
 
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -62,6 +74,11 @@ export default function Animais() {
 
     const handleSearchChange = (e) => {
         setSearchTerm(e.target.value);
+        setCurrentPage(1);
+    };
+
+    const handleSelectChange = (selectedOption) => {
+        setSelectedType(selectedOption);
         setCurrentPage(1);
     };
 
@@ -78,13 +95,12 @@ export default function Animais() {
                             <div className="d-flex justify-content-end m-3" style={{ gap: "15px" }}>
                                 <div style={{ width: "250px" }}>
                                     <Select
-                                        className="basic-single"
-                                        classNamePrefix="select"
-                                        defaultValue={opcoesTipo[0]}
-                                        isDisabled={isDisabled}
-                                        isLoading={isLoading}
-                                        name="tipo"
                                         options={opcoesTipo}
+                                        isClearable={isClearable}
+                                        isDisabled={isDisabled}
+                                        value={selectedType}
+                                        onChange={handleSelectChange}
+                                        placeholder="Selecione o tipo"
                                     />
                                 </div>
                                 <div className="input-group" style={{ width: "300px" }}>
@@ -107,7 +123,7 @@ export default function Animais() {
                         <div className="row">
                             {currentItems.map((value, index) => (
                                 <div key={index} className="col-12 col-sm-6 col-md-4 col-lg-3 mb-5">
-                                    <PetCard src={value.foto} nome={value.nome} />
+                                    <PetCard src={value.foto} nome={value.nome} tipo={value.tipo} raca={value.raca} />
                                 </div>
                             ))}
                         </div>
@@ -115,22 +131,22 @@ export default function Animais() {
                 </div>
             </div>
             <nav aria-label="Page navigation" className="mt-2">
-                        <ul className="pagination justify-content-center">
-                            <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
-                                <button className="page-link" onClick={prevPage}>Anterior</button>
-                            </li>
-                            {[...Array(Math.ceil(Animais.length / itemsPerPage)).keys()].map(number => (
-                                <li key={number} className={`page-item ${currentPage === number + 1 ? "active" : ""}`}>
-                                    <button className="page-link" onClick={() => setCurrentPage(number + 1)}>
-                                        {number + 1}
-                                    </button>
-                                </li>
-                            ))}
-                            <li className={`page-item ${currentPage === Math.ceil(Animais.length / itemsPerPage) ? "disabled" : ""}`}>
-                                <button className="page-link" onClick={nextPage}>Próximo</button>
-                            </li>
-                        </ul>
-                    </nav>
+                <ul className="pagination justify-content-center">
+                    <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
+                        <button className="page-link" onClick={prevPage}>Anterior</button>
+                    </li>
+                    {[...Array(Math.ceil(filteredAnimals.length / itemsPerPage)).keys()].map(number => (
+                        <li key={number} className={`page-item ${currentPage === number + 1 ? "active" : ""}`}>
+                            <button className="page-link" onClick={() => setCurrentPage(number + 1)}>
+                                {number + 1}
+                            </button>
+                        </li>
+                    ))}
+                    <li className={`page-item ${currentPage === Math.ceil(filteredAnimals.length / itemsPerPage) ? "disabled" : ""}`}>
+                        <button className="page-link" onClick={nextPage}>Próximo</button>
+                    </li>
+                </ul>
+            </nav>
         </Page>
     );
 }

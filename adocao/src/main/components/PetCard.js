@@ -20,9 +20,9 @@ export default function PetCard(props) {
             <img src={props.src} className="imgCard" alt="" />
             <div className="card-body text-center">
                 <h5 className="card-title">{props.nome}</h5>
+                <p className="card-text">{props.tipo}</p>
                 <p className="card-text">Idade: 1 ano e 4 meses</p>
-                <p className="card-text">Raça: Labrador</p>
-                <p className="card-text">Status: Vacinado</p>
+                <p className="card-text">Raça: {props.raca}</p>
             </div>
         </div>
     )
