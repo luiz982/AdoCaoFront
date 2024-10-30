@@ -24,8 +24,8 @@ export default function Principal() {
                                 <h1 data-aos="fade-up"></h1>
                                 <h2 data-aos="fade-up" data-aos-delay="400">Sistema para acompanhamento e controle de adoções!</h2>
                                 <div data-aos="fade-up" data-aos-delay="600">
-                                    <div className="text-center text-lg-start" onClick={() => router.push('/Animais')}>
-                                        <a href="#about" className="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
+                                    <div className="text-center text-lg-start" >
+                                        <a  onClick={() => router.push('/Animais')} className="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
                                             <span>Começar!</span>
                                             <i className="bi bi-arrow-right"></i>
                                         </a>

@@ -5,8 +5,8 @@
     box-shadow: 0px 10px 18px -8px rgba(0, 0, 0, 0.1);
     border: none;
     border-radius: 2%;
-    width: 17rem !important;
-    height: 25rem; 
+    width: 18rem !important;
+    height: 23rem; 
     cursor: pointer; 
     transition: transform 0.3s, box-shadow 0.3s;
 }
