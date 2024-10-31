@@ -42,13 +42,7 @@ export default function Login() {
                         :
                         <>Login</>}
                         </button>
-                        <div className='mx-auto lembrar' >
-                            <div className="mx-auto mb-3" >
-                                <a href="#">
-                                    Recuperar Senha
-                                </a>
-                            </div>
-                        </div>
+                        
                     </form>
                 </div>
             </div>
