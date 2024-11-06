@@ -1,0 +1,75 @@
+.container-adocoes {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container-adocoes h2 {
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.container-coluna{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 600px;
+    margin: 20px 20px 20px 100px;
+}
+
+.card-adocao {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.card-detalhes h3 {
+    font-size: 20px;
+    margin: 0;
+    color: #4CAF50;
+}
+
+.card-detalhes p {
+    margin: 5px 0;
+    color: #555;
+}
+
+.card-voluntario p strong {
+    color: #333;
+}
+
+.botao-remover {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.botao-remover:hover {
+    background-color: saddlebrown;
+}
+
+.botao-cadastrar {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.botao-cadastrar:hover {
+    background-color: #0056b3;
+}
+

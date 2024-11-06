@@ -1,0 +1,56 @@
+.container-cadastro {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container-cadastro h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+
+.form-cadastro {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 600px;
+    margin: 20px 20px 20px 100px;
+}
+
+.form-cadastro label {
+    display: flex;
+    flex-direction: column;
+    font-weight: 500;
+    color: #555;
+}
+
+.form-cadastro input,
+.form-cadastro select,
+.form-cadastro textarea {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.form-cadastro textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.botao-cadastrar {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.botao-cadastrar:hover {
+    background-color: #0056b3;
+}

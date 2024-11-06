@@ -25,4 +25,13 @@
 
 .card-body{
     border-radius: 50% !important;
+    width: 100%;
+}
+
+.card-botao{
+    display: flex;
+}
+
+.card-texto{
+    display: flex;
 }

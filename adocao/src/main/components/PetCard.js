@@ -1,29 +1,37 @@
 'use client'
 import { useState, useContext, useEffect } from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Image from 'next/image';
 import { useRouter } from "next/navigation";
-import {
-    faSquarePlus,
-
-} from '@fortawesome/free-solid-svg-icons';
-import homePage from '../../assets/imagempagPrincipal.png'
 import '../styles/PetCard.css'
 
+function calcularIdade(anoNascimento) {
+    const anoAtual = new Date().getFullYear();
+    const idade = anoAtual - anoNascimento;
+
+    return idade === 0 ? "Menos de 1 ano" : `${idade} anos`;
+}
+
+
 export default function PetCard(props) {
-    const [isLoading, setLoading] = useState(false)
     const router = useRouter();
 
+    useEffect(() => {
+        console.log("Props recebidas pelo PetCard:", props);
+    }, [props]);
+
+    const idade = calcularIdade(props.dataNascimento);
 
     return (
-        <div className="card">
-            <img src={props.src} className="imgCard" alt="" />
-            <div className="card-body text-center">
-                <h5 className="card-title">{props.nome}</h5>
-                <p className="card-text">{props.tipo}</p>
-                <p className="card-text">Idade: 1 ano e 4 meses</p>
-                <p className="card-text">Raça: {props.raca}</p>
-            </div>
+        <button 
+        className="card p-0 card-botao"
+        onClick={() => router.push(`/AnimalClicado?id=${props.id}`)}
+    >
+        <img src={props.src} className="imgCard" alt="" />
+        <div className="card-body">
+            <h5 className="card-title card-texto">{props.nome}</h5>
+            <p className="card-text card-texto">{props.tipo}</p>
+            <p className="card-text card-texto">Idade: {idade}</p>
+            <p className="card-text card-texto">Sexo: {props.sexo}</p>
         </div>
+        </button>
     )
 }

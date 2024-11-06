@@ -65,8 +65,8 @@ export default function Page(props) {
                     <div style={{ display: "flex", flexDirection: "column", height: "89vh" }}>
                         <MenuItem className='menuText' onClick={() => router.push('/Principal')} ><FontAwesomeIcon className='menuItem' icon={faHouse} /> Home</MenuItem>
                         <MenuItem className='menuText' onClick={() => router.push('/Animais')}><FontAwesomeIcon className='menuItem' icon={faDog} onClick={() => abrirMenu()} /> Animais </MenuItem>
-                        <MenuItem className='menuText' onClick={() => router.push('/Histórico') }><FontAwesomeIcon className='menuItem' icon={faScroll} onClick={() => abrirMenu()} /> Histórico </MenuItem>
-                        <MenuItem className='menuText' onClick={() => router.push('/Voluntários')} ><FontAwesomeIcon className='menuItem' icon={faPerson}/>  Voluntários </MenuItem>
+                        <MenuItem className='menuText' onClick={() => router.push('/HistoricoAdocoes') }><FontAwesomeIcon className='menuItem' icon={faScroll} onClick={() => abrirMenu()} /> Histórico </MenuItem>
+                        <MenuItem className='menuText' onClick={() => router.push('/Voluntarios')} ><FontAwesomeIcon className='menuItem' icon={faPerson}/>  Voluntários </MenuItem>
                     </div>
                         <MenuItem className='menuText' onClick={() => router.push('/Login')} ><FontAwesomeIcon className='menuItem' icon={faRightFromBracket} />
                             {!aberto && <span style={{ marginLeft: "10px" }}>Sair</span>}

@@ -1,0 +1,30 @@
+[
+    {
+        "id": 1,
+        "nome": "João Silva",
+        "anoNascimento": 1990,
+        "telefone": "(11) 91234-5678",
+        "email": "joao.silva@example.com"
+    },
+    {
+        "id": 2,
+        "nome": "Maria Oliveira",
+        "anoNascimento": 1985,
+        "telefone": "(21) 99876-5432",
+        "email": "maria.oliveira@example.com"
+    },
+    {
+        "id": 3,
+        "nome": "Carlos Pereira",
+        "anoNascimento": 1992,
+        "telefone": "(31) 98765-4321",
+        "email": "carlos.pereira@example.com"
+    },
+    {
+        "id": 4,
+        "nome": "Ana Souza",
+        "anoNascimento": 1995,
+        "telefone": "(41) 91234-9876",
+        "email": "ana.souza@example.com"
+    }
+]

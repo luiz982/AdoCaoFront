@@ -1,6 +1,6 @@
 'use client'
 import Image from 'next/image';
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Swal from 'sweetalert2';
 import ReactLoading from 'react-loading'
@@ -17,6 +17,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Select from 'react-select';
 
 export default function Animais() {
+    const [animais, setAnimais] = useState([]);
     const [isClearable, setIsClearable] = useState(true);
     const [isSearchable, setIsSearchable] = useState(true);
     const [isDisabled, setIsDisabled] = useState(false);
@@ -32,32 +33,19 @@ export default function Animais() {
         { value: 'Cachorro', label: 'Cachorro' },
         { value: 'Gato', label: 'Gato' },
     ]
-    const Animais = [
-        { nome: 'Max', foto: 'https://s2-g1.glbimg.com/RVuzSU6kwzy1OwcUwUizgW577b0=/0x161:900x744/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/W/B/bdA6Z4Rz6C5yyrB07Tcg/whatsapp-image-2021-07-13-at-4.29.58-pm.jpeg', raca: 'Labrador', tipo: 'Cachorro' },
-        { nome: 'Bella', foto: 'https://s2-g1.glbimg.com/RVuzSU6kwzy1OwcUwUizgW577b0=/0x161:900x744/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/W/B/bdA6Z4Rz6C5yyrB07Tcg/whatsapp-image-2021-07-13-at-4.29.58-pm.jpeg', raca: 'Bulldog', tipo: 'Cachorro' },
-        { nome: 'Luna', foto: 'https://s2-g1.glbimg.com/RVuzSU6kwzy1OwcUwUizgW577b0=/0x161:900x744/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/W/B/bdA6Z4Rz6C5yyrB07Tcg/whatsapp-image-2021-07-13-at-4.29.58-pm.jpeg', raca: 'Persa', tipo: 'Gato' },
-        { nome: 'Max', foto: 'https://s2-g1.glbimg.com/RVuzSU6kwzy1OwcUwUizgW577b0=/0x161:900x744/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/W/B/bdA6Z4Rz6C5yyrB07Tcg/whatsapp-image-2021-07-13-at-4.29.58-pm.jpeg', raca: 'Labrador', tipo: 'Cachorro' },
-        { nome: 'Bella', foto: 'https://s2-g1.glbimg.com/RVuzSU6kwzy1OwcUwUizgW577b0=/0x161:900x744/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/W/B/bdA6Z4Rz6C5yyrB07Tcg/whatsapp-image-2021-07-13-at-4.29.58-pm.jpeg', raca: 'Bulldog', tipo: 'Cachorro' },
-        { nome: 'Luna', foto: 'https://s2-g1.glbimg.com/RVuzSU6kwzy1OwcUwUizgW577b0=/0x161:900x744/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/W/B/bdA6Z4Rz6C5yyrB07Tcg/whatsapp-image-2021-07-13-at-4.29.58-pm.jpeg', raca: 'Persa', tipo: 'Gato' },
-        { nome: 'Max', foto: 'https://s2-g1.glbimg.com/RVuzSU6kwzy1OwcUwUizgW577b0=/0x161:900x744/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/W/B/bdA6Z4Rz6C5yyrB07Tcg/whatsapp-image-2021-07-13-at-4.29.58-pm.jpeg', raca: 'Labrador', tipo: 'Cachorro' },
-        { nome: 'Bella', foto: 'https://s2-g1.glbimg.com/RVuzSU6kwzy1OwcUwUizgW577b0=/0x161:900x744/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/W/B/bdA6Z4Rz6C5yyrB07Tcg/whatsapp-image-2021-07-13-at-4.29.58-pm.jpeg', raca: 'Bulldog', tipo: 'Cachorro' },
-        { nome: 'Luna', foto: 'https://s2-g1.glbimg.com/RVuzSU6kwzy1OwcUwUizgW577b0=/0x161:900x744/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/W/B/bdA6Z4Rz6C5yyrB07Tcg/whatsapp-image-2021-07-13-at-4.29.58-pm.jpeg', raca: 'Persa', tipo: 'Gato' },
-        { nome: 'Max', foto: 'https://s2-g1.glbimg.com/RVuzSU6kwzy1OwcUwUizgW577b0=/0x161:900x744/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/W/B/bdA6Z4Rz6C5yyrB07Tcg/whatsapp-image-2021-07-13-at-4.29.58-pm.jpeg', raca: 'Labrador', tipo: 'Cachorro' },
-        { nome: 'Bella', foto: 'https://s2-g1.glbimg.com/RVuzSU6kwzy1OwcUwUizgW577b0=/0x161:900x744/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/W/B/bdA6Z4Rz6C5yyrB07Tcg/whatsapp-image-2021-07-13-at-4.29.58-pm.jpeg', raca: 'Bulldog', tipo: 'Cachorro' },
-        { nome: 'Luna', foto: 'https://s2-g1.glbimg.com/RVuzSU6kwzy1OwcUwUizgW577b0=/0x161:900x744/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/W/B/bdA6Z4Rz6C5yyrB07Tcg/whatsapp-image-2021-07-13-at-4.29.58-pm.jpeg', raca: 'Persa', tipo: 'Gato' },
-        { nome: 'Max', foto: 'https://s2-g1.glbimg.com/RVuzSU6kwzy1OwcUwUizgW577b0=/0x161:900x744/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/W/B/bdA6Z4Rz6C5yyrB07Tcg/whatsapp-image-2021-07-13-at-4.29.58-pm.jpeg', raca: 'Labrador', tipo: 'Cachorro' },
-        { nome: 'Bella', foto: 'https://s2-g1.glbimg.com/RVuzSU6kwzy1OwcUwUizgW577b0=/0x161:900x744/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/W/B/bdA6Z4Rz6C5yyrB07Tcg/whatsapp-image-2021-07-13-at-4.29.58-pm.jpeg', raca: 'Bulldog', tipo: 'Cachorro' },
-        { nome: 'Luna', foto: 'https://s2-g1.glbimg.com/RVuzSU6kwzy1OwcUwUizgW577b0=/0x161:900x744/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/W/B/bdA6Z4Rz6C5yyrB07Tcg/whatsapp-image-2021-07-13-at-4.29.58-pm.jpeg', raca: 'Persa', tipo: 'Gato' },
-        { nome: 'Max', foto: 'https://s2-g1.glbimg.com/RVuzSU6kwzy1OwcUwUizgW577b0=/0x161:900x744/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/W/B/bdA6Z4Rz6C5yyrB07Tcg/whatsapp-image-2021-07-13-at-4.29.58-pm.jpeg', raca: 'Labrador', tipo: 'Cachorro' },
-        { nome: 'Bella', foto: 'https://s2-g1.glbimg.com/RVuzSU6kwzy1OwcUwUizgW577b0=/0x161:900x744/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/W/B/bdA6Z4Rz6C5yyrB07Tcg/whatsapp-image-2021-07-13-at-4.29.58-pm.jpeg', raca: 'Bulldog', tipo: 'Cachorro' },
-        { nome: 'Luna', foto: 'https://s2-g1.glbimg.com/RVuzSU6kwzy1OwcUwUizgW577b0=/0x161:900x744/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/W/B/bdA6Z4Rz6C5yyrB07Tcg/whatsapp-image-2021-07-13-at-4.29.58-pm.jpeg', raca: 'Persa', tipo: 'Gato' },
-        { nome: 'Max', foto: 'https://s2-g1.glbimg.com/RVuzSU6kwzy1OwcUwUizgW577b0=/0x161:900x744/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/W/B/bdA6Z4Rz6C5yyrB07Tcg/whatsapp-image-2021-07-13-at-4.29.58-pm.jpeg', raca: 'Labrador', tipo: 'Cachorro' },
-        { nome: 'Bella', foto: 'https://s2-g1.glbimg.com/RVuzSU6kwzy1OwcUwUizgW577b0=/0x161:900x744/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/W/B/bdA6Z4Rz6C5yyrB07Tcg/whatsapp-image-2021-07-13-at-4.29.58-pm.jpeg', raca: 'Bulldog', tipo: 'Cachorro' },
-        { nome: 'Luna', foto: 'https://s2-g1.glbimg.com/RVuzSU6kwzy1OwcUwUizgW577b0=/0x161:900x744/984x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/W/B/bdA6Z4Rz6C5yyrB07Tcg/whatsapp-image-2021-07-13-at-4.29.58-pm.jpeg', raca: 'Persa', tipo: 'Gato' },
 
-    ];
-
-    const filteredAnimals = Animais.filter(animal => {
+    useEffect(() => {
+        async function fetchAnimais() {
+            const response = await fetch('/animais.json');
+            const data = await response.json();
+            console.log(data)
+            setAnimais(data);
+        }
+        fetchAnimais();
+    }, []);
+ 
+    
+    const filteredAnimals = animais.filter(animal => {
         const matchesType = selectedType && selectedType.value !== 'Todos' ? animal.tipo === selectedType.value : true;
         const matchesSearch = animal.nome.toLowerCase().includes(searchTerm.toLowerCase()) ||
             animal.raca.toLowerCase().includes(searchTerm.toLowerCase());
@@ -83,14 +71,15 @@ export default function Animais() {
     };
 
     return (
-        <Page>
-            <div className='card-container'>
-                <div className='container'>
+        <>
+        <Page/>
+            <div className='container-principal'>
+                <div className='container-conteudo'>
                     <h1 className='mb-3 text-center  mb-5'>Pets para adoção</h1>
-                    <div className="container">
+                    <div className="container-nav">
                         <div className='filtros d-flex justify-content-between mb-3'>
                             <div className="mt-3">
-                                <button type="button" className="btn btn-primary"><FontAwesomeIcon style={{ marginRight: "8px" }} icon={faPlus} /> Novo Pet</button>
+                                <button type="button" onClick={() => router.push('/CadastrarAnimal')} className="btn btn-primary"><FontAwesomeIcon style={{ marginRight: "8px" }} icon={faPlus} /> Novo Pet</button>
                             </div>
                             <div className="d-flex justify-content-end m-3" style={{ gap: "15px" }}>
                                 <div style={{ width: "250px" }}>
@@ -119,11 +108,19 @@ export default function Animais() {
                             </div>
                         </div>
                     </div>
-                    <div className="container">
+                    <div className="container-animais">
                         <div className="row">
                             {currentItems.map((value, index) => (
-                                <div key={index} className="col-12 col-sm-6 col-md-4 col-lg-3 mb-5">
-                                    <PetCard src={value.foto} nome={value.nome} tipo={value.tipo} raca={value.raca} />
+                                <div key={index} className="col-12 col-md-6 col-lg-4 col-xl-3 mb-5 fileira-cards">
+                                    <PetCard 
+                                        id={value.id} 
+                                        src={value.foto}
+                                        nome={value.nome}
+                                        tipo={value.tipo}
+                                        raca={value.raca}
+                                        dataNascimento={value.anoNascimento}
+                                        sexo={value.sexo}
+                                    />
                                 </div>
                             ))}
                         </div>
@@ -147,6 +144,6 @@ export default function Animais() {
                     </li>
                 </ul>
             </nav>
-        </Page>
+            </>
     );
 }

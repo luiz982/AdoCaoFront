@@ -14,10 +14,11 @@ export default function Principal() {
     const router = useRouter();
 
     return (
-        <Page>
+        <>
+        <Page/>
             <div>
                 <section id="hero" className="hero d-flex align-items-center">
-                    <div className="container">
+                    <div className="container-perso">
                         <div className="row">
                             <div className="col-lg-6 d-flex flex-column justify-content-center">
                                 <h1 data-aos="fade-up">Bem-vindo ao sistema de gestão da ADASFA!</h1>
@@ -25,7 +26,7 @@ export default function Principal() {
                                 <h2 data-aos="fade-up" data-aos-delay="400">Sistema para acompanhamento e controle de adoções!</h2>
                                 <div data-aos="fade-up" data-aos-delay="600">
                                     <div className="text-center text-lg-start" >
-                                        <a  onClick={() => router.push('/Animais')} className="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
+                                        <a  onClick={() => router.push('/Animais')} className="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center botao">
                                             <span>Começar!</span>
                                             <i className="bi bi-arrow-right"></i>
                                         </a>
@@ -39,6 +40,6 @@ export default function Principal() {
                     </div>
                 </section>
             </div>
-        </Page>
+            </>
     );
 }

@@ -1,0 +1,71 @@
+.container-maior{
+    width:100%;
+    display: flex;
+    justify-content: center;
+}
+
+.card-principal {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    max-width: 800px;
+    margin: 20px 20px 20px 100px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.card-conteudo {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-imagem img {
+    width: 400px;
+    height: auto;
+    border-radius: 8px 0 0 8px;
+}
+
+.card-infos {
+    padding: 15px;
+}
+
+.card-titulo {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.card-texto {
+    margin: 5px 0;
+}
+
+.botao {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.botao-adocao {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.botao-adocao:hover {
+    background-color: saddlebrown;
+}
+
+.botao:hover {
+    background-color: #0056b3;
+}
+
