@@ -58,7 +58,7 @@ export default function AnimalClicado() {
                         </div>
                     </div>
                     <p><strong>Observações:</strong> {animal.observacoes}</p>
-                    <button className="botao-adocao" onClick={() => router.push('/CadastrarAdocao')}>
+                    <button className="botao-adocao" onClick={() => router.push(`/CadastrarAdocao?id=${animalId}`)}>
                         Cadastrar adoção
                     </button>
                     <button className="botao" onClick={() => router.push('/Animais')}>
