@@ -13,6 +13,7 @@ export default class Voluntario {
 
     CadastrarVoluntario = async (voluntario) => {
         try {
+            
             let response = await api.post(`${services.voluntario.cadastrarVoluntario}`, voluntario);
 
             return response;

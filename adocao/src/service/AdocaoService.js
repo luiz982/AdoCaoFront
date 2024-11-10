@@ -13,7 +13,7 @@ export default class Adocao {
 
     CadastrarAdocao = async (adocao) => {
         try {
-            console.log('data', adocao)
+            // console.log('data', adocao)
             let response = await api.post(`${services.adocao.cadastrarAdocao}`, adocao);
 
             return response;

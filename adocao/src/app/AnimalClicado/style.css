@@ -51,7 +51,7 @@
     transition: background-color 0.3s;
 }
 
-.botao-adocao {
+.botao-deletar {
     background-color: red;
     color: white;
     border: none;
@@ -61,11 +61,29 @@
     transition: background-color 0.3s;
 }
 
-.botao-adocao:hover {
+.botao-deletar:hover {
     background-color: saddlebrown;
 }
 
 .botao:hover {
     background-color: #0056b3;
+}
+
+.botao-adocao {
+    background-color: darkolivegreen;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.botao-adocao:hover {
+    background-color: green;
+}
+
+.card-infos2-texto{
+    margin: 0;
 }
 

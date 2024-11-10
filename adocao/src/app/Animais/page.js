@@ -7,6 +7,7 @@ import ReactLoading from 'react-loading'
 import Page from '@/main/components/Page';
 import '../Principal/style.css'
 import '../Animais/style.css'
+import Animal from '@/service/AnimalService';
 import PetCard from '@/main/components/PetCard';
 import {
     faSearch,
@@ -18,6 +19,10 @@ import Select from 'react-select';
 
 export default function Animais() {
     const [animais, setAnimais] = useState([]);
+    const animal = new Animal();
+    const [loading, setLoading] = useState(true);
+
+
     const [isClearable, setIsClearable] = useState(true);
     const [isSearchable, setIsSearchable] = useState(true);
     const [isDisabled, setIsDisabled] = useState(false);
@@ -34,17 +39,28 @@ export default function Animais() {
         { value: 'Gato', label: 'Gato' },
     ]
 
-    useEffect(() => {
-        async function fetchAnimais() {
-            const response = await fetch('/animais.json');
-            const data = await response.json();
-            console.log(data)
-            setAnimais(data);
-        }
+    async function fetchAnimais() {
+        setLoading(true)
+        await animal.BuscarAnimaisNaoAdotados().then((response) => {
+            if(response.status == 200){
+                setAnimais(response.data)
+            }
+        })
+        .catch((err) => {
+            // console.log(err)
+        })
+        .finally(() => {
+            setLoading(false)
+        })
+    }
+
+    useEffect(() => {      
         fetchAnimais();
+        
+        
     }, []);
  
-    
+    console.log(animais);
     const filteredAnimals = animais.filter(animal => {
         const matchesType = selectedType && selectedType.value !== 'Todos' ? animal.tipo === selectedType.value : true;
         const matchesSearch = animal.nome.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -69,7 +85,7 @@ export default function Animais() {
         setSelectedType(selectedOption);
         setCurrentPage(1);
     };
-
+    
     return (
         <>
         <Page/>
@@ -114,11 +130,11 @@ export default function Animais() {
                                 <div key={index} className="col-12 col-md-6 col-lg-4 col-xl-3 mb-5 fileira-cards">
                                     <PetCard 
                                         id={value.id} 
-                                        src={value.foto}
+                                        src={`data:image/jpeg;base64,${value.foto}`}
                                         nome={value.nome}
                                         tipo={value.tipo}
                                         raca={value.raca}
-                                        dataNascimento={value.anoNascimento}
+                                        dataNascimento={value.dataNascimento}
                                         sexo={value.sexo}
                                     />
                                 </div>

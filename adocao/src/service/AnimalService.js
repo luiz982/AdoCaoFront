@@ -24,6 +24,7 @@ export default class Animal {
 
     CadastrarAnimal = async (animal) => {
         try {
+        console.log('data', animal)
             let response = await api.post(`${services.animal.cadastrarAnimal}`, animal);
 
             return response;

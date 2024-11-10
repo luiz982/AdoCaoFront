@@ -36,6 +36,8 @@ export default function CadastrarVoluntario() {
         };
 
         await voluntarioService.CadastrarVoluntario(dataToSend).then((response) => {
+            console.log("Resposta do servidor:", response);
+
             if (response.status == 201) {
                 Swal.fire({
                     icon: "success",
@@ -53,7 +55,7 @@ export default function CadastrarVoluntario() {
             }
         })
         .catch((err) => {
-                console.log(err)
+                // console.log(err)
                 Swal.fire({
                     icon: "error",
                     text: "Erro ao cadastrar usuário!",

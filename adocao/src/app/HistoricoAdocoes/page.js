@@ -16,13 +16,13 @@ export default function HistoricoAdocoes() {
     async function fetchAdocoes() {
         setLoading(true)
         await adocao.BuscarAdocao().then((response) => {
-            console.log(response)
+            // console.log(response)
             if (response.status == 200) {
                 setAdocoes(response.data)
             }
         })
         .catch((err) => {
-            console.log(err)
+            // console.log(err)
         })
         .finally(() => {
             setLoading(false)

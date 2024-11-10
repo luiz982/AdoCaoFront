@@ -22,7 +22,7 @@ export default function ListaVoluntarios() {
             }
         })
         .catch((err) => {
-            console.log(err)
+            // console.log(err)
         })
         .finally(() => {
             setLoading(false)
@@ -73,7 +73,7 @@ export default function ListaVoluntarios() {
             }
         })
         .catch((err) => {
-            console.log(err)
+            // console.log(err)
             Swal.fire({
                 icon: "error",
                 text: "Erro ao deletar usuário!",

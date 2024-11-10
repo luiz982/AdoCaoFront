@@ -37,7 +37,7 @@ export default function CadastrarAdocao() {
         } else {
             animalService.BuscarAnimalEspecifico(id)
                 .then((response) => {
-                    console.log(response);
+                    // console.log(response);
                     if (response.status === 200) {
                         const animalData = response.data;
                         setFormData(prevData => ({
@@ -58,7 +58,7 @@ export default function CadastrarAdocao() {
                     }
                 })
                 .catch((err) => {
-                    console.log(err);
+                    // console.log(err);
                     Swal.fire({
                         icon: "error",
                         text: "Erro ao encontrar animal!",
@@ -77,7 +77,7 @@ export default function CadastrarAdocao() {
     const carregarVoluntarios = async () => {
         await voluntarioService.BuscarVoluntarios()
             .then((response) => {
-                console.log('voluntarios', response);
+                // console.log('voluntarios', response);
                 if (response.status === 200) {
                     const fetchedVolunteers = response.data;
                     setVoluntarios(fetchedVolunteers);
@@ -100,7 +100,7 @@ export default function CadastrarAdocao() {
                 }
             })
             .catch((err) => {
-                console.log(err);
+                // console.log(err);
                 Swal.fire({
                     icon: "error",
                     text: "Erro ao carregar voluntários!",
@@ -112,7 +112,7 @@ export default function CadastrarAdocao() {
             })
             .finally(() => {
                 setLoading(false);
-                console.log('FormData após carregar voluntários e animal:', formData);
+                // console.log('FormData após carregar voluntários e animal:', formData);
             });
     };
 
@@ -123,7 +123,7 @@ export default function CadastrarAdocao() {
             ...prevData,
             [name]: value
         }));
-        console.log('mudou', formData)
+        // console.log('mudou', formData)
     }
 
     async function handleSubmit(event) {
@@ -158,7 +158,7 @@ export default function CadastrarAdocao() {
                 }
             })
             .catch((err) => {
-                console.log(err.message);
+                // console.log(err.message);
                 Swal.fire({
                     icon: "error",
                     text: "Erro ao cadastrar adoção!",

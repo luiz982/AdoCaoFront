@@ -3,31 +3,91 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Page from '@/main/components/Page';
 import './style.css';
+import Animal from '@/service/AnimalService';
+import Swal from 'sweetalert2';
+
 
 export default function CadastrarAnimal() {
     const router = useRouter();
     const [formData, setFormData] = useState({
         nome: '',
-        foto: '',
+        foto: null,
         raca: '',
         tipo: '',
-        observacoes: '',
+        informacoes: '',
         sexo: '',
-        anoNascimento: ''
+        dataNascimento: '',
+        status:false
     });
 
+    const animalService = new Animal();
+    
     function handleChange(event) {
-        const { name, value } = event.target;
-        setFormData(prevData => ({
-            ...prevData,
-            [name]: value
-        }));
+        const { name, value, files } = event.target;
+        
+        if (name === "foto" && files.length > 0) {
+            const file = files[0];
+            const reader = new FileReader();
+            
+            reader.onloadend = () => {
+
+                const base64String = reader.result.split(',')[1];
+                setFormData(prevData => ({
+                    ...prevData,
+                    foto: base64String
+                }));
+            };
+            
+            reader.readAsDataURL(file);
+        } else {
+            setFormData(prevData => ({
+                ...prevData,
+                [name]: value
+            }));
+        }
     }
 
-    function handleSubmit(event) {
+    async function handleSubmit(event) {
         event.preventDefault();
-        console.log('Dados do Animal:', formData);
-        router.push('/Animais');
+        const dataToSend = {
+            nome: formData.nome,
+            raca: formData.raca,
+            Informacoes: formData.informacoes,
+            dataNascimento: formData.dataNascimento,
+            Status: formData.status,
+            foto: formData.foto,
+            tipo: formData.tipo,
+            Sexo: formData.sexo
+        };
+
+        console.log("Dados enviados:", dataToSend);
+        
+
+
+        await animalService.CadastrarAnimal(dataToSend).then((response) => {
+            if (response.status == 201) {
+                Swal.fire({
+                    icon: "success",
+                    text: "Animal cadastrado com sucesso!",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        router.push('/Animais');
+                    }
+                });
+            } else {
+                Swal.fire({
+                    icon: "error",
+                    text: "Erro ao cadastrar animal!",
+                })
+            }
+        })
+        .catch((err) => {
+                // console.log(err)
+                Swal.fire({
+                    icon: "error",
+                    text: "Erro ao cadastrar animal!",
+                });
+        })
     }
 
     return(
@@ -41,8 +101,8 @@ export default function CadastrarAnimal() {
                     <input type="text" name="nome" value={formData.nome} onChange={handleChange} required />
                 </label>
                 <label>
-                    Foto (URL):
-                    <input type="text" name="foto" value={formData.foto} onChange={handleChange} required />
+                    Foto:
+                    <input type="file" name="foto" onChange={handleChange} accept="image/*" required />
                 </label>
                 <label>
                     Raça:
@@ -59,19 +119,19 @@ export default function CadastrarAnimal() {
                 </label>
                 <label>
                     Observações:
-                    <textarea name="observacoes" value={formData.observacoes} onChange={handleChange} />
+                    <textarea name="informacoes" value={formData.informacoes} onChange={handleChange} />
                 </label>
                 <label>
                     Sexo:
                     <select name="sexo" value={formData.sexo} onChange={handleChange} required>
                         <option value="">Selecione o sexo</option>
-                        <option value="Macho">Macho</option>
-                        <option value="Fêmea">Fêmea</option>
+                        <option value="M">Macho</option>
+                        <option value="F">Fêmea</option>
                     </select>
                 </label>
                 <label>
-                    Ano de Nascimento:
-                    <input type="number" name="anoNascimento" value={formData.anoNascimento} onChange={handleChange} required />
+                    Data de Nascimento:
+                    <input type="date" name="dataNascimento" value={formData.dataNascimento} onChange={handleChange} required />
                 </label>
                 <button type="submit" className="botao-cadastrar">Cadastrar Animal</button>
             </form>
