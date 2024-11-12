@@ -1,9 +1,9 @@
 import api, {services} from "@/service/connection";
 
 export default class Usuario {
-    Login = async (usuario) => {
+    Login = async (usuario, senha) => {
         try {
-            let response = await api.post(`${services.usuario.Login}`, usuario);
+            let response = await api.post(`${services.usuario.Login}?usuario=${usuario}&senha=${senha}`);
 
             return response;
         } catch (ex) {

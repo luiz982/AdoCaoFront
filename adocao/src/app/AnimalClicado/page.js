@@ -3,11 +3,11 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Page from '@/main/components/Page';
 import '../AnimalClicado/style.css'
-import Animal from '@/service/AnimalService';  // Supondo que Animal seja uma classe
+import Animal from '@/service/AnimalService';  
 import Swal from 'sweetalert2';
 
 
-// Função para calcular a idade do animal
+
 function calcularIdade(dataNascimento) {
     const dataNascimentoObj = new Date(dataNascimento);
     const anoNascimento = dataNascimentoObj.getFullYear();
@@ -74,10 +74,8 @@ export default function AnimalClicado() {
         }
     }, [animalId]);
 
-    // Verifica se o animal ainda não foi carregado
     if (!animal) return <div>Carregando...</div>;
 
-    // Calcula a idade do animal
     const idade = calcularIdade(animal.dataNascimento);
 
     const handleDelete = async (id) => {
@@ -111,7 +109,6 @@ export default function AnimalClicado() {
             }
         })
         .catch((err) => {
-            // console.log(err)
             Swal.fire({
                 icon: "error",
                 text: "Erro ao deletar animal!",
@@ -129,7 +126,6 @@ export default function AnimalClicado() {
                 <div className="card-principal">
                     <div className="card-conteudo">
                         <div className="card-imagem">
-                            {/* Exibe a foto em base64 */}
                             <img src={`data:image/jpeg;base64,${animal.foto}`} alt={animal.nome} />
                         </div>
                         <div className="card-infos">

@@ -16,6 +16,7 @@ import {
     faScroll,
     faPerson
 } from '@fortawesome/free-solid-svg-icons';
+import Swal from "sweetalert2";
 
 export default function Page(props) {
     const router = useRouter();
@@ -40,6 +41,22 @@ export default function Page(props) {
                 setAberto(true)
             }
         }
+    }
+
+    const handleLogOut = () => {
+        Swal.fire({
+            title: "Deseja Sair?",
+            showDenyButton: true,
+            showCancelButton: false,
+            confirmButtonText: "Sim",
+            denyButtonText: `Não`,
+            confirmButtonColor: "rgba(0, 122, 255, 1)",
+            width: "400px"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                router.push('/Login')
+            }
+        });
     }
 
     return (
@@ -68,7 +85,7 @@ export default function Page(props) {
                         <MenuItem className='menuText' onClick={() => router.push('/HistoricoAdocoes') }><FontAwesomeIcon className='menuItem' icon={faScroll} onClick={() => abrirMenu()} /> Histórico </MenuItem>
                         <MenuItem className='menuText' onClick={() => router.push('/Voluntarios')} ><FontAwesomeIcon className='menuItem' icon={faPerson}/>  Voluntários </MenuItem>
                     </div>
-                        <MenuItem className='menuText' onClick={() => router.push('/Login')} ><FontAwesomeIcon className='menuItem' icon={faRightFromBracket} />
+                        <MenuItem className='menuText' onClick={() => handleLogOut()} ><FontAwesomeIcon className='menuItem' icon={faRightFromBracket} />
                             {!aberto && <span style={{ marginLeft: "10px" }}>Sair</span>}
                         </MenuItem>
                     </Menu>
